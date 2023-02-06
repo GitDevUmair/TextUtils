@@ -8,9 +8,15 @@ import PropTypes from "prop-types";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 export default function Navebar(props) {
+  let x;
+  if (props.mode === "light" && props.redmode === "Enable red mode") {
+    x = "light";
+  } else {
+    x = "dark";
+  }
   return (
     <div>
-      <Navbar bg={props.mode} variant={props.mode} expand="lg">
+      <Navbar bg={x} variant={x} expand="lg">
         <Container fluid>
           <Navbar.Brand to="/">{props.title}</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -36,7 +42,7 @@ export default function Navebar(props) {
                 type="switch"
                 id="custom-switch"
                 label={props.redmode}
-                className="text-dark"
+                className={`text-${x === "light" ? "dark" : "light"}`}
                 onClick={props.switchRed}
               />
               <Form.Check

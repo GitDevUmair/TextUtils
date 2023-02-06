@@ -32,6 +32,18 @@ export default function TextForm(props) {
     navigator.clipboard.writeText(newText.value);
     props.showAlert("Success : text copied", "success");
   };
+  let bgcolor;
+  let clr;
+  if (props.mode === "dark" && props.redmode === "Enable red mode") {
+    bgcolor = "#042743";
+    clr = "white";
+  } else if (props.mode === "light" && props.redmode === "back to normal") {
+    bgcolor = "red";
+    clr = "black";
+  } else {
+    bgcolor = "white";
+    clr = "black";
+  }
   return (
     <>
       <Container>
@@ -47,11 +59,12 @@ export default function TextForm(props) {
             id="Box"
             placeholder="Leave a comment here"
             value={text}
-            style={{
-              backgroundColor: props.mode === "dark" ? "#042743" : "white",
-              color: props.mode === "dark" ? "white" : "black",
-              height: "180px",
-            }}
+            // style={{
+            //   backgroundColor: props.mode === "dark" ? "#042743" : "white",
+            //   color: props.mode === "dark" ? "white" : "black",
+            //   height: "180px",
+            // }}
+            style={{ backgroundColor: bgcolor, color: clr, height: "180px" }}
             onChange={(e) => {
               setText(e.target.value);
             }}
