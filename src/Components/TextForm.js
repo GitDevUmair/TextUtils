@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import React from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -30,15 +30,16 @@ export default function TextForm(props) {
     let newText = document.getElementById("Box");
     newText.select();
     navigator.clipboard.writeText(newText.value);
+    document.getSelection().removeAllRanges();
     props.showAlert("Success : text copied", "success");
   };
   let bgcolor;
   let clr;
   if (props.mode === "dark" && props.redmode === "Enable red mode") {
-    bgcolor = "#042743";
+    bgcolor = "#13436b";
     clr = "white";
   } else if (props.mode === "light" && props.redmode === "back to normal") {
-    bgcolor = "red";
+    bgcolor = "#eb1c1c";
     clr = "black";
   } else {
     bgcolor = "white";
@@ -71,6 +72,7 @@ export default function TextForm(props) {
           />
         </FloatingLabel>
         <Button
+          disabled={text.length === 0}
           variant={`${
             props.redmode === "Enable red mode" ? "primary" : "warning"
           } mx-2 btn-sm my-3`}
@@ -79,6 +81,7 @@ export default function TextForm(props) {
           change-to-uppercase
         </Button>
         <Button
+          disabled={text.length === 0}
           variant={`${
             props.redmode === "Enable red mode" ? "primary" : "warning"
           } mx-2 btn-sm my-3`}
@@ -87,6 +90,7 @@ export default function TextForm(props) {
           change-to-lowercase
         </Button>
         <Button
+          disabled={text.length === 0}
           variant={`${
             props.redmode === "Enable red mode" ? "primary" : "warning"
           } mx-2 btn-sm my-3`}
@@ -95,6 +99,7 @@ export default function TextForm(props) {
           clear text
         </Button>
         <Button
+          disabled={text.length === 0}
           variant={`${
             props.redmode === "Enable red mode" ? "primary" : "warning"
           } mx-2 btn-sm my-3`}
@@ -103,6 +108,7 @@ export default function TextForm(props) {
           remove extra spaces
         </Button>
         <Button
+          disabled={text.length === 0}
           variant={`${
             props.redmode === "Enable red mode" ? "primary" : "warning"
           } mx-2 btn-sm my-3`}
@@ -115,13 +121,26 @@ export default function TextForm(props) {
         <h2>Your text summary</h2>
         <p>
           <b>{text.length}</b> characters and{" "}
-          <b>{text.split(" ").length - 1} </b> words
+          <b>
+            {
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length
+            }{" "}
+          </b>{" "}
+          words
         </p>
         <p>
-          <b>{0.008 * text.split(" ").length} </b> Minutes read
+          <b>
+            {0.008 *
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length}{" "}
+          </b>{" "}
+          Minutes read
         </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter text to preview here"}</p>
       </Container>
     </>
   );

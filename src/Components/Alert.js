@@ -3,13 +3,15 @@ import Alert from "react-bootstrap/Alert";
 
 function Alertfunc(props) {
   return (
-    props.alert && (
-      <div>
-        <Alert key={props.alert.type} variant={props.alert.type}>
-          {props.alert.msg}
-        </Alert>
-      </div>
-    )
+    <div style={{ height: "60px" }}>
+      {props.alert && (
+        <div>
+          <Alert key={props.alert.type} variant={props.alert.type}>
+            {props.alert.msg}
+          </Alert>
+        </div>
+      )}
+    </div>
   );
 }
 

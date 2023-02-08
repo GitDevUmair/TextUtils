@@ -3,13 +3,13 @@ import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
 import React, { useState } from "react";
 import Alert from "./Components/Alert";
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Routes,
-//   Link,
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Routes,
+  Link,
+} from "react-router-dom";
 
 function App() {
   const [redmode, setredMode] = React.useState("Enable red mode");
@@ -24,7 +24,7 @@ function App() {
   const switchRed = () => {
     if (redmode === "Enable red mode") {
       setredMode("back to normal");
-      document.body.style.backgroundColor = "red";
+      document.body.style.backgroundColor = "#f50707";
       showAlert("Success : red mode enabled", "primary");
     } else {
       setredMode("Enable red mode");
@@ -46,37 +46,47 @@ function App() {
 
   return (
     <>
-      <Navbar
-        title="Textutils"
-        about="About"
-        switchMode={switchMode}
-        mode={mode}
-        redmode={redmode}
-        switchRed={switchRed}
-      />
-      <Alert alert={alert} />
-      {/* <Router> */}
-      {/* A <Switch> looks through its children <Route>s and
+      <Router>
+        <Navbar
+          title="TextUtils"
+          about="About"
+          switchMode={switchMode}
+          mode={mode}
+          redmode={redmode}
+          switchRed={switchRed}
+        />
+        <Alert alert={alert} />
+        {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-      {/* <Routes> */}
-      {/* <Route path="/about">
+        <Routes>
+          {/* <Route path="/about">
             <About />
           </Route> */}
-      {/* <Route */}
-      {/* path="/" */}
-      {/* element={ */}
-      <TextForm
-        heading="Enter Text Here"
-        mode={mode}
-        redmode={redmode}
-        showAlert={showAlert}
-      />
-      {/* } */}
-      {/* /> */}
+          {/* <Route */}
+          {/* path="/" */}
+          {/* element={ */}
 
-      {/* <Route path="/about" element={<About />} />
+          {/* } */}
+          {/* /> */}
+          <Route
+            exact
+            path="/"
+            element={
+              <TextForm
+                heading="Enter Text Here"
+                mode={mode}
+                redmode={redmode}
+                showAlert={showAlert}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/about"
+            element={<About mode={mode} redmode={redmode} />}
+          />
         </Routes>
-      </Router> */}
+      </Router>
 
       {/* <About /> */}
     </>
