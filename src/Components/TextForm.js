@@ -27,10 +27,7 @@ export default function TextForm(props) {
     props.showAlert("Success : removed extra spaces", "success");
   };
   const copyText = () => {
-    let newText = document.getElementById("Box");
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
     props.showAlert("Success : text copied", "success");
   };
   let bgcolor;
@@ -60,11 +57,6 @@ export default function TextForm(props) {
             id="Box"
             placeholder="Leave a comment here"
             value={text}
-            // style={{
-            //   backgroundColor: props.mode === "dark" ? "#042743" : "white",
-            //   color: props.mode === "dark" ? "white" : "black",
-            //   height: "180px",
-            // }}
             style={{ backgroundColor: bgcolor, color: clr, height: "180px" }}
             onChange={(e) => {
               setText(e.target.value);
@@ -123,7 +115,7 @@ export default function TextForm(props) {
           <b>{text.length}</b> characters and{" "}
           <b>
             {
-              text.split(" ").filter((element) => {
+              text.split(/\s+/).filter((element) => {
                 return element.length !== 0;
               }).length
             }{" "}

@@ -56,20 +56,8 @@ function App() {
           switchRed={switchRed}
         />
         <Alert alert={alert} />
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Routes>
-          {/* <Route path="/about">
-            <About />
-          </Route> */}
-          {/* <Route */}
-          {/* path="/" */}
-          {/* element={ */}
-
-          {/* } */}
-          {/* /> */}
           <Route
-            exact
             path="/"
             element={
               <TextForm
@@ -81,14 +69,11 @@ function App() {
             }
           />
           <Route
-            exact
             path="/about"
             element={<About mode={mode} redmode={redmode} />}
           />
         </Routes>
       </Router>
-
-      {/* <About /> */}
     </>
   );
 }
